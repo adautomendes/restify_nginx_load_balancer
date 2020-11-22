@@ -1,0 +1,21 @@
+{
+    "name": "core",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "mongoose": "^5.10.11",
+        "restify": "^8.5.1",
+        "restify-router": "^0.6.2"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.4"
+    }
+}

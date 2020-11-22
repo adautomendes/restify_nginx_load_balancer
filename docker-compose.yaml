@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  mongo-db:
+    image: "mongo"
+    restart: unless-stopped
+    volumes:
+      - ".:/mongo-db"
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+
+  core:
+    build: "./core"
+    volumes:
+      - ".:/core"
+    expose:
+      - "5000"
+    networks:
+      - app-network
+    depends_on:
+      - mongo-db
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/nginx.conf:ro
+    depends_on:
+      - core
+    ports:
+      - "4000:4000"
+
+  api:
+    build: "./api"
+    volumes:
+      - ".:/api"
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+    depends_on:
+      - core
+
+networks:
+  app-network:
+    driver: bridge
